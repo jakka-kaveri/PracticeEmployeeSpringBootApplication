@@ -1,6 +1,7 @@
 package com.kaveri.Employee.Service;
 
 import com.kaveri.Employee.Entity.Employee;
+import com.kaveri.Employee.Exception.EmployeeNotFoundException;
 import com.kaveri.Employee.Repository.EmployeeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,10 +18,27 @@ public class EmployeeService {
     public List<Employee> getAllEmployees(){
         return employeeRepo.findAll();
     }
-//    public List<Employee> findByName(String name){
-//        Optional<List<Employee>> employees = Optional.ofNullable(employeeRepo.findByName(name));
-//
-//    }
+    public List<Employee> findByName(String name){
+        List<Employee> employees = employeeRepo.findByName(name);
+        if(employees==null){
+            throw new EmployeeNotFoundException("No results found");
+        }
+        return employees;
+    }
+    public List<Employee> getBySalary(double salary){
+        List<Employee> employees = employeeRepo.findBySalary(salary);
+        if(employees==null){
+            throw new EmployeeNotFoundException("No results found");
+        }
+        return employees;
+    }
+    public List<Employee> getBySalaryRange(double minSalary , double maxSalary){
+        List<Employee> employees = employeeRepo.FindBySalaryRange(minSalary,maxSalary);
+        if(employees==null){
+            throw new EmployeeNotFoundException("No results found");
+        }
+        return employees;
+    }
 
     public Optional<Employee> getEmployeeById(int id){
         return employeeRepo.findById(id);

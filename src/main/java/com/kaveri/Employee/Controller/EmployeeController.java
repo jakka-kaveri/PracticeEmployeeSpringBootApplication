@@ -30,6 +30,18 @@ public class EmployeeController {
         }
         return employee.get();
     }
+    @GetMapping("search/{name}")
+    public List<Employee> getEmployeesByName(@PathVariable String name) throws EmployeeNotFoundException{
+        return employeeService.findByName(name);
+    }
+    @GetMapping("/salary/{salary}")
+    public List<Employee> getEmployeesBySalary(@PathVariable double salary) throws EmployeeNotFoundException{
+        return employeeService.getBySalary(salary);
+    }
+    @GetMapping("/salaryrange/{minSalary}/maxSalary")
+    public List<Employee> getEmployeesBySalary(@PathVariable double minSalary, @PathVariable double maxSalary) throws EmployeeNotFoundException{
+        return employeeService.getBySalaryRange(minSalary,maxSalary);
+    }
     @PostMapping("/")
     public Employee saveEmployee(@RequestBody @Validated Employee employee){
         return employeeService.saveEmployee(employee);
