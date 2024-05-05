@@ -1,6 +1,5 @@
 package com.kaveri.Employee.Exception;
 
-import com.kaveri.Employee.Entity.Employee;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
