@@ -39,6 +39,13 @@ public class EmployeeService {
         }
         return employees;
     }
+    public  List<Employee> getByDesignationAndSalary(String designation , double salary){
+        List<Employee> employees = employeeRepo.findByDesignationAndSalary(designation,salary);
+        if(employees==null){
+            throw new EmployeeNotFoundException("No results found");
+        }
+        return employees;
+    }
 
     public Optional<Employee> getEmployeeById(int id){
         return employeeRepo.findById(id);

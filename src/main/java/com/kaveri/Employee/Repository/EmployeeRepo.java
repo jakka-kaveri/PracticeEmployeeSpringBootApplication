@@ -16,4 +16,7 @@ public interface EmployeeRepo extends JpaRepository<Employee,Integer> {
 
     @Query(value = "SELECT e FROM Employee e WHERE e.salary>=:minSalary AND e.salary<=:maxSalary")
     List<Employee> FindBySalaryRange(double minSalary , double maxSalary);
+
+    @Query(value = "SELECT * FROM employee_details WHERE designation LIKE :designation AND salary =:salary", nativeQuery = true)
+    List<Employee> findByDesignationAndSalary(String designation,double salary);
 }
